@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Usman Azeem - Portfolio</title>
+  <meta name="description" content="Portfolio of Usman Azeem — Frontend & Canva Designer. Projects, skills, and contact." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b0d12;
+      --surface: #12151d;
+      --muted-surface:#0f1117;
+      --text: #e7ecf1;
+      --muted: #9aa6b2;
+      --brand: #6ee7b7; /* mint */
+      --brand-2: #7aa2ff; /* blue accent */
+      --danger: #ff7676;
+      --ring: rgba(110,231,183,.35);
+      --radius: 18px;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+    }
+    [data-theme="light"]{
+      --bg:#f5f7fb; --surface:#ffffff; --muted-surface:#f0f3f8; --text:#0b1220; --muted:#5b6876; --ring: rgba(122,162,255,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1100px, 92%);margin-inline:auto}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.1rem;border-radius:12px;border:1px solid transparent;background:var(--brand);color:#06251a;font-weight:700;box-shadow:0 6px 16px rgba(110,231,183,.25);transition:.25s ease}
+    .btn:hover{transform:translateY(-2px)}
+    .btn.outline{background:transparent;color:var(--text);border-color:#283449}
+
+    /* Navbar */
+    .nav{position:sticky;top:0;z-index:50;background:linear-gradient(to bottom, rgba(0,0,0,.65), rgba(0,0,0,0));backdrop-filter:saturate(140%) blur(8px)}
+    .nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+    .brand{display:flex;align-items:center;gap:.65rem}
+    .brand .logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;box-shadow:0 8px 18px rgba(122,162,255,.25)}
+    .brand strong{font-family:Poppins,Inter,sans-serif;letter-spacing:.3px}
+    .nav ul{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
+    .nav a{padding:.6rem .9rem;border-radius:10px}
+    .nav a:hover{background:rgba(122,162,255,.12)}
+    .hamburger{display:none}
+
+    /* Hero */
+    .hero{padding:5.5rem 0 3rem;position:relative;overflow:hidden}
+    .hero-grid{display:grid;gap:2rem;grid-template-columns:1.2fr .8fr;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:.6rem;padding:.35rem .7rem;border-radius:999px;background:rgba(122,162,255,.15);border:1px solid rgba(122,162,255,.25);font-size:.85rem;color:#cfd9ff}
+    .title{font-family:Poppins,Inter,sans-serif;font-size:clamp(2.1rem, 2.2rem + 2.2vw, 4rem);line-height:1.1;margin:.8rem 0}
+    .subtitle{color:var(--muted);max-width:48ch}
+    .cta{margin-top:1.5rem;display:flex;gap:.8rem;flex-wrap:wrap}
+    .hero .card{background:radial-gradient(1000px 400px at 100% -20%, rgba(110,231,183,.18), transparent 45%), var(--surface);border:1px solid #232a37;border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
+
+    /* Sections */
+    section{padding:3.5rem 0}
+    .section-title{font-size:1.8rem;font-weight:800;margin-bottom:1.25rem}
+    .grid{display:grid;gap:1.2rem}
+
+    /* Skills */
+    .skills{grid-template-columns:repeat(auto-fit, minmax(180px,1fr))}
+    .chip{display:flex;align-items:center;gap:.6rem;padding:.8rem;border-radius:14px;background:var(--muted-surface);border:1px solid #1b2333}
+    .chip svg{width:18px;height:18px}
+
+    /* Projects */
+    .projects{grid-template-columns:repeat(auto-fit, minmax(260px, 1fr))}
+    .card{background:var(--surface);border:1px solid #232a37;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .card .thumb{aspect-ratio:16/10;background:#0a0e16;position:relative;overflow:hidden}
+    .card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+    .card:hover .thumb img{transform:scale(1.05)}
+    .card .content{padding:1rem 1rem 1.1rem}
+    .tag{display:inline-block;font-size:.75rem;padding:.25rem .6rem;border-radius:999px;background:rgba(110,231,183,.12);border:1px solid rgba(110,231,183,.25);margin-bottom:.6rem}
+    .card h3{margin:.35rem 0 .4rem;font-size:1.1rem}
+    .card p{color:var(--muted);font-size:.95rem}
+    .card .actions{margin-top:auto;padding:1rem;display:flex;gap:.6rem}
+    .link-btn{flex:1;text-align:center;padding:.7rem .9rem;border-radius:12px;border:1px solid #273149;background:transparent;color:var(--text);font-weight:600}
+    .link-btn:hover{background:rgba(122,162,255,.12)}
+
+    /* About */
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .about .blurb{background:var(--surface);border:1px solid #232a37;border-radius:var(--radius);padding:1.2rem}
+
+    /* Contact */
+    .contact-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:1.5rem}
+    form{background:var(--surface);border:1px solid #232a37;border-radius:var(--radius);padding:1.2rem}
+    .field{display:grid;gap:.4rem;margin-bottom:1rem}
+    input, textarea{background:var(--muted-surface);border:1px solid #1b2333;color:var(--text);border-radius:12px;padding:.9rem}
+
+    /* Footer */
+    footer{padding:2rem 0;border-top:1px solid #232a37;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero-grid{grid-template-columns:1fr}
+      .about{grid-template-columns:1fr}
+      .contact-wrap{grid-template-columns:1fr}
+    }
+    @media (max-width: 1050px){
+      .mobile-menu{
+        display: none;
+      }
+    }
+    
+    @media (max-width: 720px){
+      .nav ul{display:none}
+      .hamburger{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem .8rem;border-radius:12px;border:1px solid #2a3448;color:var(--text); background:var(--surface)}
+      .mobile-menu{display:none;position:fixed;inset:64px 12px auto;z-index:60;background:var(--surface);color:var(--text); border:1px solid #2a3448 ;border-radius:18px;padding:.8rem}
+      .mobile-menu a{display:block;padding:.8rem;border-radius:12px}
+      .mobile-menu a:hover{background:rgba(122,162,255,.12)}
+    }
+
+    /* Fancy scroll reveal */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <!-- ===== Navbar ===== -->
+  <nav class="nav">
+    <div class="container wrap">
+      <a class="brand" href="#top" aria-label="Home">
+        <span class="logo" aria-hidden="true"><img src="me.jpeg" alt="logo" style="border-radius: 20px;"></span>
+        <strong>Muhammad Usman </strong>
+      </a>
+      <ul aria-label="Primary">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button id="themeToggle" class="btn outline" type="button" aria-label="Toggle theme">Change Theme</button></li>
+      </ul>
+      <button class="hamburger" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">☰ Menu</button>
+    </div>
+    <div class="container">
+      <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile menu">
+        <a href="#projects" onclick="closeMenu()">Projects</a>
+        <a href="#skills" onclick="closeMenu()">Skills</a>
+        <a href="#about" onclick="closeMenu()">About</a>
+        <a href="#contact" onclick="closeMenu()">Contact</a>
+        <a href="#cv" onclick="closeMenu()">Download CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <header id="top" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge">Hi! I'm Usman — Full stack development Learner & Canva Designer</span>
+        <h1 class="title">I build clean, responsive UIs & eyecatching social content.</h1>
+        <p class="subtitle">Intermidiete student leveling up daily. Comfortable with HTML, CSS and now ~40% into JavaScript. I also design posts/reels/thumbnails in Canva to boost brands and creators.</p>
+        <div class="cta">
+          <a class="btn" href="#projects">See My Projects</a>
+          <a class="btn outline" href="https://instagram.com/your_instagram_here" target="_blank" rel="noopener" aria-label="Open Instagram portfolio">Instagram</a>
+          <a id="cv" class="btn outline" href="My CV.pdf" download>Download CV</a>
+        </div>
+        <p style="margin-top:.8rem;color:var(--muted);font-size:.95rem"> </p>
+      </div>
+      <div class="card">
+        <div class="thumb" aria-hidden="true">
+          <!-- Replace this preview image with your own banner -->
+          <img src="code editor.jpeg" alt="Code editor aesthetic preview"/>
+        </div>
+        <div class="content">
+          <span class="tag">Open to Work</span>
+          <h3>Need a neat website or insta post?</h3>
+          <p class="subtitle">I build landing pages, responsive UI components and design engaging Canva posts, thumbnails, and carousel reels.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Projects ===== -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="grid projects">
+        <!-- Project Card 1 -->
+        <article class="card reveal">
+          <div class="thumb">
+            <img src="airbnb.png" alt="Airbnb UI screenshot placeholder">
+          </div>
+          <div class="content">
+            <span class="tag">HTML • CSS </span>
+            <h3>Airbnb clone</h3>
+            <p>Fully responsive hero, product grid, and cart UI with smooth scroll.</p>
+          </div>
+          <div class="actions">
+            <a class="link-btn" href="https://usman90617.github.io/Airbnb-Clone/" target="_blank" rel="noopener">Live Demo</a>
+            
+          </div>
+        </article>
+        <!-- Project Card 2 -->
+        <article class="card reveal">
+          <div class="thumb">
+            <img src="saylani login page.png" alt="Portfolio site screenshot placeholder">
+          </div>
+          <div class="content">
+            <span class="tag">HTML • CSS</span>
+            <h3>Saylani Login Page (Figma → Code)</h3>
+            <p>Pixel-perfect login screen coded from Figma with icons inside inputs and accessible labels.</p>
+          </div>
+          <div class="actions">
+            <a class="link-btn" href="https://usman90617.github.io/Saylani-page/" target="_blank" rel="noopener">Live Demo</a>
+            
+          </div>
+        </article>
+        <!-- Project Card 3 -->
+        <article class="card reveal">
+          <div class="thumb">
+            <img src="todo-list.png" alt="Todo app screenshot placeholder">
+          </div>
+          <div class="content">
+            <span class="tag">JavaScript</span>
+            <h3>Todo List with Update Feature</h3>
+            <p>Vanilla JS CRUD with <code>splice()</code>,<br> <code>localStorage</code>, and edit-in-place UX. Built to learn array logic.</p>
+          </div>
+          <div class="actions">
+            <a class="link-btn" href="https://usman90617.github.io/Todo-list/" target="_blank" rel="noopener">Live Demo</a>
+            
+          </div>
+        </article>
+        <!-- Project Card 4 (Canva) -->
+        <article class="card reveal">
+          <div class="thumb">
+            <img src="CLASSIC (1).png" alt="Canva designs collage placeholder">
+          </div>
+          <div class="content">
+            <span class="tag">Canva</span>
+            <h3>Brand Advertising & Instagram Carousels  & Thumbnails</h3>
+            <p>Designed 20+ posts: carousel reels, thumbnails, and promos with consistent brand style.</p>
+          </div>
+          <div class="actions">
+            <a class="link-btn" href="https://instagram.com/creativ_e.usman" target="_blank" rel="noopener">View on Instagram</a>
+          </div>
+        </article>
+       </div>
+    </div>
+  </section>
+
+  <!-- ===== Skills ===== -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <div class="grid skills">
+        <div class="chip reveal">💻 HTML5 & Semantic Markup</div>
+        <div class="chip reveal">🎨 CSS3, Flexbox & Grid</div>
+        <div class="chip reveal">📱 Responsive Design</div>
+        <div class="chip reveal">⚙️ JavaScript (40% and growing)</div>
+        <div class="chip reveal">🧩 DOM, Events, Arrays <br> (<code>splice()</code>, <br> <code>map</code>)</div>
+        <div class="chip reveal">🖼️ Canva (Posts, Reels, Thumbnails)</div>
+        <div class="chip reveal">🚀 Performance Basics</div>
+        <div class="chip reveal">🔍 SEO Basics</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about">
+        <div class="blurb reveal">
+          <h3>Who am I?</h3>
+          <p>I'm Usman from Pakistan — a Intermediete student and budding full stack developer. I enjoy turning ideas into simple, clean interfaces and creating engaging social media designs on Canva.</p>
+          <p>I'm actively learning JavaScript and building projects to practice: todo apps, animated pages, and UI components.</p>
+        </div>
+        <div class="blurb reveal">
+          <h3>What I can do for you</h3>
+          <ul>
+            <li>Multiple page websites / landing pages</li>
+            <li>Responsive layouts (mobile-first)</li>
+            <li>Canva posts: carousels, promos, thumbnails, Brand Advertising</li>
+            <li>Fix layout issues and polish UI</li>
+          </ul>
+          <div class="cta">
+            <a class="btn" href="#contact">Hire Me</a>
+            <a class="btn outline" href="mailto:ua682018@gmail.com">Email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-wrap">
+        <form class="reveal" onsubmit="openMail(event)">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+          <div class="field">
+            <label for="msg">Message</label>
+            <textarea id="msg" name="message" rows="5" placeholder="Tell me about your project" required></textarea>
+          </div>
+          <button class="btn" type="submit">Send Message</button>
+          <p class="subtitle" style="margin-top:.6rem">This opens your mail app with pre‑filled message. For a real backend later, we can use Formspree or Firebase.</p>
+        </form>
+        <div class="blurb reveal" style="background:var(--surface);border:1px solid #232a37;border-radius:var(--radius);padding:1.2rem">
+          <h3>Socials</h3>
+          <p class="subtitle">DMs open — I reply fast.</p>
+          <ul>
+            <li>Instagram: <a href="https://instagram.com/your_instagram_here" target="_blank" rel="noopener">@creativ_e.usman</a></li>
+            <li>Email: <a href="mailto:ua682018@gmail.com">ua682018@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <span>© <span id="year"></span> Usman Azeem. All rights reserved.</span>
+      <span>Built with using HTML, CSS & JS.</span>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Mobile Menu =====
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function closeMenu(){ mobileMenu.style.display='none'; menuBtn.setAttribute('aria-expanded','false'); }
+    menuBtn?.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      menuBtn.setAttribute('aria-expanded', String(!open));
+    });
+
+    // ===== Theme Toggle (Dark/Light) =====
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme){ root.setAttribute('data-theme', savedTheme); }
+    themeToggle?.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      root.setAttribute('data-theme', isLight ? 'dark' : 'light');
+      localStorage.setItem('theme', isLight ? 'dark' : 'light');
+    });
+
+    // ===== Mailto helper =====
+    function openMail(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+      const subject = encodeURIComponent(`New inquiry from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${msg}`);
+      window.location.href = `mailto:hello@example.com?subject=${subject}&body=${body}`;
+    }
+
+    // ===== Scroll reveal =====
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('show'); io.unobserve(entry.target); }
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // ===== Current year =====
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== Smooth scrolling for same-page anchors =====
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const targetId = a.getAttribute('href');
+        if(targetId.length > 1){
+          e.preventDefault();
+          document.querySelector(targetId)?.scrollIntoView({behavior:'smooth'});
+          closeMenu();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
